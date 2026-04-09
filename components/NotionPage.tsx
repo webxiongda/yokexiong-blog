@@ -29,6 +29,8 @@ import { useDarkMode } from '@/lib/use-dark-mode'
 
 import { Footer } from './Footer'
 import { GitHubShareButton } from './GitHubShareButton'
+import { HomeLinks } from './HomeLinks'
+import { HomeRecents } from './HomeRecents'
 import { Loading } from './Loading'
 import { NotionPageHeader } from './NotionPageHeader'
 import { Page404 } from './Page404'
@@ -204,6 +206,7 @@ const notionRendererComponents: Partial<NotionComponents> = {
 export function NotionPage({
   site,
   recordMap,
+  recentRecordMap,
   error,
   pageId
 }: types.PageProps) {
@@ -300,6 +303,12 @@ export function NotionPage({
 
       {isLiteMode && <BodyClassName className='notion-lite' />}
       {isDarkMode && <BodyClassName className='dark-mode' />}
+
+      {pageId === site.rootNotionPageId && <HomeLinks />}
+
+      {pageId === site.rootNotionPageId && recentRecordMap && (
+        <HomeRecents site={site} recordMap={recentRecordMap} />
+      )}
 
       <NotionRenderer
         bodyClassName={cs(

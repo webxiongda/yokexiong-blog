@@ -108,7 +108,7 @@ export function PageHead({
           {JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'BlogPosting',
-            '@id': `${url}#BlogPosting`,
+            '@id': url ? `${url}#BlogPosting` : undefined,
             mainEntityOfPage: url,
             url,
             headline: title,
