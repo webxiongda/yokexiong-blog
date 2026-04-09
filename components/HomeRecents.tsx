@@ -8,6 +8,7 @@ import {
   getPageProperty
 } from 'notion-utils'
 
+import { useI18n } from '@/lib/i18n'
 import { mapImageUrl } from '@/lib/map-image-url'
 import { mapPageUrl } from '@/lib/map-page-url'
 import { type Site } from '@/lib/types'
@@ -71,6 +72,7 @@ export function HomeRecents({
   site: Site
   recordMap: ExtendedRecordMap
 }) {
+  const { t } = useI18n()
   const pageIds = getRecentPageIds(recordMap).slice(0, 2)
   const createPageUrl = mapPageUrl(site, recordMap, new URLSearchParams())
 
@@ -82,11 +84,11 @@ export function HomeRecents({
     <section className={styles.homeRecents}>
       <div className={styles.homeRecentsInner}>
         <div className={styles.homeRecentsHeading}>
-          <p className={styles.homeRecentsEyebrow}>From Notion</p>
+          <p className={styles.homeRecentsEyebrow}>{t.home.recentsEyebrow}</p>
           <div className={styles.homeRecentsTitleRow}>
-            <h2 className={styles.homeRecentsTitle}>最近更新</h2>
+            <h2 className={styles.homeRecentsTitle}>{t.home.recentsTitle}</h2>
             <Link href='/recents' className={styles.homeRecentsLink}>
-              查看全部
+              {t.home.recentsLink}
             </Link>
           </div>
         </div>

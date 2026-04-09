@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import * as config from '@/lib/config'
+import { useI18n } from '@/lib/i18n'
 import { GitHubIcon } from '@/lib/icons/github'
 import { LinkedInIcon } from '@/lib/icons/linkedin'
 import { MoonIcon } from '@/lib/icons/moon'
@@ -8,11 +9,13 @@ import { SunIcon } from '@/lib/icons/sun'
 import { TwitterIcon } from '@/lib/icons/twitter'
 import { useDarkMode } from '@/lib/use-dark-mode'
 
+import { LanguageToggle } from './LanguageToggle'
 import styles from './styles.module.css'
 
 export function FooterImpl() {
   const [hasMounted, setHasMounted] = React.useState(false)
   const { isDarkMode, toggleDarkMode } = useDarkMode()
+  const { t } = useI18n()
   const currentYear = new Date().getFullYear()
 
   const onToggleDarkMode = React.useCallback(
@@ -40,11 +43,13 @@ export function FooterImpl() {
             href='#'
             role='button'
             onClick={onToggleDarkMode}
-            title='Toggle dark mode'
+            title={t.ui.themeToggle}
           >
             {isDarkMode ? <MoonIcon /> : <SunIcon />}
           </a>
         )}
+
+        <LanguageToggle />
       </div>
 
       <div className={styles.social}>

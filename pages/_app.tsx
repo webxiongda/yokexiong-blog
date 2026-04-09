@@ -27,6 +27,7 @@ import {
   posthogConfig,
   posthogId
 } from '@/lib/config'
+import { I18nProvider } from '@/lib/i18n'
 
 if (!isServer) {
   bootstrap()
@@ -61,5 +62,9 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   }, [router.events])
 
-  return <Component {...pageProps} />
+  return (
+    <I18nProvider>
+      <Component {...pageProps} />
+    </I18nProvider>
+  )
 }

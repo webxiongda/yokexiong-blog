@@ -9,12 +9,12 @@ export default siteConfig({
   rootNotionSpaceId: null,
 
   // basic site info (required)
-  name: 'Personal Blog',
+  name: 'Yoke Xiong 的小站',
   domain: process.env.NEXT_PUBLIC_SITE_DOMAIN || 'localhost:3000',
   author: 'Yoke Xiong',
 
   // open graph metadata (optional)
-  description: 'Writing, notes, and updates from Yoke Xiong.',
+  description: '写旅行、推荐、生活记录，也慢慢存下一些值得反复回看的内容。',
 
   // social usernames (optional)
   twitter: process.env.NEXT_PUBLIC_TWITTER_USERNAME || undefined,

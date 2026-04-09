@@ -1,8 +1,10 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 import type * as types from '@/lib/types'
 import * as config from '@/lib/config'
 import { getSocialImageUrl } from '@/lib/get-social-image-url'
+import { useI18n } from '@/lib/i18n'
 
 export function PageHead({
   site,
@@ -19,12 +21,44 @@ export function PageHead({
   url?: string
   isBlogPost?: boolean
 }) {
+  const router = useRouter()
+  const { t } = useI18n()
   const rssFeedUrl = `${config.host}/feed`
 
   title = title ?? site?.name
   description = description ?? site?.description
 
   const socialImageUrl = getSocialImageUrl(pageId) || image
+  const localizedSiteTitle = t.site.title
+  const localizedSiteDescription = t.site.description
+  const isGalleryRoute = router.asPath?.startsWith('/gallery')
+
+  if (pageId === config.rootNotionPageId) {
+    title = localizedSiteTitle
+    description = localizedSiteDescription
+  } else if (pageId === config.pageUrlOverrides.about) {
+    title = `${t.meta.aboutTitle} | ${localizedSiteTitle}`
+    description = t.meta.aboutDescription
+  } else if (pageId === config.pageUrlOverrides.archive) {
+    const routeTitle = isGalleryRoute ? t.meta.galleryTitle : t.meta.archiveTitle
+    const routeDescription = isGalleryRoute
+      ? t.meta.galleryDescription
+      : t.meta.archiveDescription
+
+    title = `${routeTitle} | ${localizedSiteTitle}`
+    description = routeDescription
+  } else if (pageId === config.pageUrlOverrides.recents) {
+    title = `${t.meta.recentsTitle} | ${localizedSiteTitle}`
+    description = t.meta.recentsDescription
+  } else {
+    if (title === config.name) {
+      title = localizedSiteTitle
+    }
+
+    if (description === config.description) {
+      description = localizedSiteDescription
+    }
+  }
 
   return (
     <Head>
