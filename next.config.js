@@ -3,6 +3,11 @@
 
 export default {
   staticPageGenerationTimeout: 300,
+  allowedDevOrigins: [
+    '192.168.31.163',
+    'localhost',
+    '127.0.0.1'
+  ],
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'www.notion.so' },
