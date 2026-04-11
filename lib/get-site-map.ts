@@ -9,7 +9,7 @@ import type * as types from './types'
 import * as config from './config'
 import { includeNotionIdInUrls } from './config'
 import { getCanonicalPageId } from './get-canonical-page-id'
-import { notion } from './notion-api'
+import { getNotionPage } from './notion-api'
 
 const uuid = !!includeNotionIdInUrls
 
@@ -30,12 +30,7 @@ const getAllPages = pMemoize(getAllPagesImpl, {
 })
 
 const getPage = async (pageId: string, opts?: any) => {
-  return notion.getPage(pageId, {
-    kyOptions: {
-      timeout: 30_000
-    },
-    ...opts
-  })
+  return getNotionPage(pageId, opts)
 }
 
 async function getAllPagesImpl(

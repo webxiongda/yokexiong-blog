@@ -17,6 +17,7 @@ import {
   NotionRenderer,
   useNotionContext
 } from 'react-notion-x'
+import { Collection } from 'react-notion-x/third-party/collection'
 import { EmbeddedTweet, TweetNotFound, TweetSkeleton } from 'react-tweet'
 import { useSearchParam } from 'react-use'
 
@@ -113,9 +114,6 @@ const Code = dynamic(() =>
   })
 )
 
-const Collection = dynamic(() =>
-  import('react-notion-x/third-party/collection').then((m) => m.Collection)
-)
 const Equation = dynamic(() =>
   import('react-notion-x/third-party/equation').then((m) => m.Equation)
 )
@@ -304,12 +302,6 @@ export function NotionPage({
       {isLiteMode && <BodyClassName className='notion-lite' />}
       {isDarkMode && <BodyClassName className='dark-mode' />}
 
-      {pageId === site.rootNotionPageId && <HomeLinks />}
-
-      {pageId === site.rootNotionPageId && recentRecordMap && (
-        <HomeRecents site={site} recordMap={recentRecordMap} />
-      )}
-
       <NotionRenderer
         bodyClassName={cs(
           styles.notion,
@@ -334,6 +326,12 @@ export function NotionPage({
         pageAside={pageAside}
         footer={<Footer />}
       />
+
+      {pageId === site.rootNotionPageId && recentRecordMap && (
+        <HomeRecents site={site} recordMap={recentRecordMap} />
+      )}
+
+      {pageId === site.rootNotionPageId && <HomeLinks />}
 
       <GitHubShareButton />
     </>

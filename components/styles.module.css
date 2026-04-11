@@ -222,6 +222,30 @@
   visibility: hidden;
 }
 
+.navTopRow {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 12px;
+  flex: 1 1 auto;
+}
+
+.navUtilities {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.navLinksRow {
+  flex: 0 0 auto;
+}
+
+.navLink {
+  flex: 0 0 auto;
+}
+
 .languageToggle {
   display: inline-flex;
   align-items: center;
@@ -523,6 +547,39 @@
 }
 
 @media (max-width: 640px) {
+  .navTopRow {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .navUtilities {
+    gap: 2px;
+  }
+
+  .navLinksRow {
+    width: 100%;
+  }
+
+  .navLink {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  .languageToggle {
+    gap: 2px;
+    padding: 3px;
+  }
+
+  .languageToggleCompact {
+    margin-right: 0;
+  }
+
+  .languageToggleButton {
+    min-width: 36px;
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+
   .homeLinks {
     width: calc(100vw - 20px);
     margin-top: 18px;

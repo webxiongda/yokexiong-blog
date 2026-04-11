@@ -49,11 +49,23 @@ export function NotionPageHeader({
   }
 
   return (
-    <header className='notion-header'>
+    <header className='notion-header custom-header'>
       <div className='notion-nav-header'>
-        <Breadcrumbs block={block} rootOnly={true} />
+        <div className={styles.navTopRow}>
+          <Breadcrumbs block={block} rootOnly={true} />
 
-        <div className='notion-nav-header-rhs breadcrumbs'>
+          <div className={styles.navUtilities}>
+            <LanguageToggle compact />
+
+            <ToggleThemeButton />
+
+            {isSearchEnabled && <Search block={block} title={null} />}
+          </div>
+        </div>
+
+        <div
+          className={cs('notion-nav-header-rhs', 'breadcrumbs', styles.navLinksRow)}
+        >
           {navigationLinks
             ?.map((link, index) => {
               if (!link?.pageId && !link?.url) {
@@ -83,12 +95,6 @@ export function NotionPageHeader({
               }
             })
             .filter(Boolean)}
-
-          <LanguageToggle compact />
-
-          <ToggleThemeButton />
-
-          {isSearchEnabled && <Search block={block} title={null} />}
         </div>
       </div>
     </header>
